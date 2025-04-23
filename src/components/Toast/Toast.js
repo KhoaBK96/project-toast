@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import {
   AlertOctagon,
   AlertTriangle,
@@ -9,6 +9,7 @@ import {
 
 import VisuallyHidden from "../VisuallyHidden";
 
+import { ToastContext } from "../ToastProvider/ToastProvider";
 import styles from "./Toast.module.css";
 
 const ICONS_BY_VARIANT = {
@@ -18,10 +19,10 @@ const ICONS_BY_VARIANT = {
   error: AlertOctagon,
 };
 
-function Toast({ message, variant, id, handleDismissToast}) {
+function Toast({ message, variant, id}) {
   const stylesVariant = `${styles.toast} ${styles[variant]}`
   const Icon = ICONS_BY_VARIANT[variant]
-  
+  const {handleDismissToast} = React.useContext(ToastContext)
   return (
     <div className={stylesVariant}>
       <div className={styles.iconContainer}>
